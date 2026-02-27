@@ -3,163 +3,475 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SMS Consent Policy - Apex Integrations LLC</title>
+    <title>A2P Campaign Registration - SMS Consent Process | Apex Integrations LLC</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             line-height: 1.6;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px;
             color: #333;
-            background-color: #f9f9f9;
+            background-color: #f5f5f7;
         }
+        
+        .header {
+            background: linear-gradient(135deg, #007AFF 0%, #0051D5 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
         .container {
+            max-width: 1000px;
+            margin: -30px auto 60px;
+            padding: 0 20px;
+        }
+        
+        .card {
             background: white;
+            border-radius: 12px;
             padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        h1 {
-            color: #1a1a1a;
-            border-bottom: 3px solid #007AFF;
-            padding-bottom: 10px;
             margin-bottom: 30px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
         }
+        
         h2 {
             color: #007AFF;
-            margin-top: 30px;
-            margin-bottom: 15px;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #007AFF;
         }
+        
+        h3 {
+            color: #1d1d1f;
+            font-size: 1.4em;
+            margin: 30px 0 15px;
+        }
+        
         p {
             margin-bottom: 15px;
+            font-size: 1.05em;
+            line-height: 1.7;
         }
-        ul, ol {
-            margin-bottom: 15px;
-            padding-left: 25px;
+        
+        .emphasis-box {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 6px;
         }
-        li {
+        
+        .emphasis-box strong {
+            color: #d39e00;
+            font-size: 1.1em;
+        }
+        
+        .critical-box {
+            background: #f8d7da;
+            border-left: 5px solid #dc3545;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 6px;
+        }
+        
+        .critical-box strong {
+            color: #721c24;
+            font-size: 1.15em;
+        }
+        
+        .success-box {
+            background: #d4edda;
+            border-left: 5px solid #28a745;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 6px;
+        }
+        
+        .info-box {
+            background: #e7f3ff;
+            border-left: 5px solid #007AFF;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 6px;
+        }
+        
+        .message-box {
+            background: #f8f9fa;
+            border: 2px solid #dee2e6;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 1em;
+            line-height: 1.6;
+        }
+        
+        .flow-steps {
+            counter-reset: step-counter;
+            list-style: none;
+            padding: 0;
+        }
+        
+        .flow-steps li {
+            counter-increment: step-counter;
+            margin-bottom: 30px;
+            padding-left: 60px;
+            position: relative;
+        }
+        
+        .flow-steps li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: #007AFF;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        
+        .flow-steps li strong {
+            display: block;
+            font-size: 1.2em;
             margin-bottom: 8px;
+            color: #1d1d1f;
         }
-        .highlight-box {
-            background: #f0f8ff;
-            border-left: 4px solid #007AFF;
-            padding: 15px;
-            margin: 20px 0;
+        
+        .screenshot {
+            margin: 30px 0;
+            text-align: center;
         }
-        .contact-box {
-            background: #f0f8ff;
-            border-left: 4px solid #007AFF;
-            padding: 15px;
-            margin: 20px 0;
+        
+        .screenshot img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            border: 1px solid #e0e0e0;
+        }
+        
+        .screenshot-caption {
+            margin-top: 15px;
+            font-size: 0.95em;
+            color: #666;
+            font-style: italic;
+        }
+        
+        .two-col-screenshots {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        .contact-footer {
+            background: #1d1d1f;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 60px;
+        }
+        
+        .contact-footer a {
+            color: #007AFF;
+            text-decoration: none;
+        }
+        
+        .contact-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .header p {
+                font-size: 1em;
+            }
+            
+            .card {
+                padding: 25px;
+            }
+            
+            h2 {
+                font-size: 1.5em;
+            }
+            
+            .flow-steps li {
+                padding-left: 50px;
+            }
+            
+            .flow-steps li::before {
+                width: 35px;
+                height: 35px;
+                font-size: 1em;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="header">
+        <h1>A2P Campaign Registration</h1>
+        <p>SMS Customer Consent Process for Apex Integrations LLC</p>
+    </div>
+
     <div class="container">
-        <h1>SMS Messaging Consent Policy</h1>
-        <p class="highlight-box">
-            <strong>Apex Integrations LLC</strong><br>
-            Last Updated: January 31, 2026
-        </p>
-
-        <h2>Our Consent Process</h2>
-        
-        <p>Apex Integrations LLC obtains consent from customers before sending SMS messages. We primarily use <strong>verbal consent confirmed and documented in our Detail Pro app</strong>.</p>
-
-        <h2>How We Obtain Consent</h2>
-        
-        <p>During service booking or intake, our staff:</p>
-        
-        <ol>
-            <li><strong>Ask the customer verbally:</strong> Staff explain that we send text messages for appointment reminders, service updates, and scheduling. We ask the customer if they would like to receive these messages.</li>
+        <div class="card">
+            <h2>Purpose of This Page</h2>
+            <p>This page documents the complete SMS consent process for <strong>Apex Integrations LLC</strong> (operating as <strong>Detail Pro</strong>) for Application-to-Person (A2P) messaging campaign registration compliance.</p>
             
-            <li><strong>Receive affirmative consent:</strong> The customer must say "yes" or otherwise clearly agree to receive SMS messages. Simply providing a phone number is not enough.</li>
+            <div class="info-box">
+                <p><strong>Business Information:</strong></p>
+                <p>
+                    <strong>Business Name:</strong> Apex Integrations LLC<br>
+                    <strong>App Name:</strong> Detail Pro<br>
+                    <strong>Industry:</strong> Mobile Auto Detailing Services<br>
+                    <strong>Location:</strong> Arizona, United States<br>
+                    <strong>Contact:</strong> <a href="mailto:Apexintegrations2006@gmail.com">Apexintegrations2006@gmail.com</a>
+                </p>
+            </div>
             
-            <li><strong>Document consent in Detail Pro app:</strong> After receiving verbal consent, staff immediately record this by activating the SMS consent toggle in the Detail Pro app for that customer.</li>
-        </ol>
-
-        <div class="highlight-box">
-            <p><strong>What customers are told:</strong></p>
-            <p><em>"We can send you text messages for appointment reminders, service completion notifications, and scheduling links. Message and data rates may apply. You can reply STOP at any time to opt out. Is it okay if we text you at this number?"</em></p>
+            <p>We use SMS messaging exclusively for <strong>transactional, service-related communications</strong> including appointment reminders, service completion notifications, and scheduling links.</p>
         </div>
 
-        <h2>Additional Consent Methods</h2>
-        
-        <p>In some cases, we may also obtain consent through:</p>
-        
-        <ul>
-            <li><strong>Written forms:</strong> Customers may check a box or sign a form indicating SMS consent when available</li>
-            <li><strong>Digital opt-in:</strong> Customers may provide consent through online booking forms or customer portals</li>
-        </ul>
-        
-        <p>However, <strong>verbal consent documented in the Detail Pro app is our primary method</strong>.</p>
-
-        <h2>SMS Consent Documentation in Detail Pro</h2>
-        
-        <p>Below is a screenshot from our Detail Pro app showing how staff document SMS consent:</p>
-        
-        <div style="margin: 30px 0;">
-            <h3 style="color: #007AFF; margin-bottom: 15px;">Detail Pro App - SMS Consent Toggle</h3>
-            <div style="background: #f5f5f5; padding: 20px; border-radius: 8px; text-align: center;">
-                <img id="screenshot1" src="https://i.imgur.com/TShK6xa.png" alt="SMS Consent Toggle in Detail Pro" style="max-width: 100%; height: auto; border: 2px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-                <p style="margin-top: 15px; color: #666; font-size: 14px;">Staff use this toggle to record SMS consent after receiving verbal confirmation from the customer</p>
+        <div class="card">
+            <h2>Critical Compliance Statement</h2>
+            
+            <div class="critical-box">
+                <p><strong>🚫 NO MESSAGES ARE SENT WITHOUT EXPLICIT CUSTOMER CONSENT</strong></p>
+                <p>Our system requires customers to actively opt-in by replying <strong>YES</strong>, <strong>START</strong>, or <strong>UNSTOP</strong> to an initial opt-in message before ANY other messages can be sent. Staff cannot send appointment reminders, service notifications, or any other messages until the customer has explicitly consented via SMS reply.</p>
+            </div>
+            
+            <div class="emphasis-box">
+                <p><strong>⚠️ COMPLETE MESSAGE BLOCKING</strong></p>
+                <p>If a customer replies <strong>STOP</strong>, all messaging is completely blocked. Staff cannot send any messages—not even a new opt-in message. Only the customer can unblock messaging by texting <strong>UNSTOP</strong> or <strong>START</strong> back to our number.</p>
             </div>
         </div>
 
-        <h2>Types of Messages We Send</h2>
-        
-        <p>All messages are <strong>transactional and service-related</strong>. Customers receive:</p>
-        
-        <ul>
-            <li><strong>Appointment Reminders:</strong> Notifications about upcoming scheduled appointments</li>
-            <li><strong>Service Completion Notifications:</strong> Alerts when their vehicle is ready for pickup</li>
-            <li><strong>Scheduling Links:</strong> Links to book or reschedule appointments</li>
-            <li><strong>Service Follow-Ups:</strong> Post-service check-ins and feedback requests</li>
-        </ul>
-        
-        <p>We do not send marketing or promotional messages unless separately opted in.</p>
+        <div class="card">
+            <h2>Complete SMS Consent Flow</h2>
+            <p>Our consent process follows a strict two-stage opt-in system that ensures customers explicitly consent before receiving any automated messages.</p>
+            
+            <ol class="flow-steps">
+                <li>
+                    <strong>Customer Information Collection</strong>
+                    <p>A customer's name and phone number are added to our Detail Pro system in one of two ways:</p>
+                    <ul style="margin-top: 10px; margin-left: 20px;">
+                        <li><strong>In-Person:</strong> Staff manually adds customer information during service intake</li>
+                        <li><strong>Online Booking:</strong> Customer provides their information through our online booking system</li>
+                    </ul>
+                    <p style="margin-top: 10px;"><em>Note: Simply collecting a phone number does NOT grant permission to send messages.</em></p>
+                </li>
+                
+                <li>
+                    <strong>Staff Initiates Opt-In Process</strong>
+                    <p>Before any messages can be sent, staff must manually click the <strong>"Send Opt-In Text"</strong> button in the Detail Pro app. This sends the initial opt-in message to the customer.</p>
+                    <div class="critical-box" style="margin-top: 15px;">
+                        <p><strong>🔒 SYSTEM BLOCKS ALL MESSAGES</strong></p>
+                        <p>At this stage, the system displays "Waiting for Customer to Opt In" and blocks staff from sending ANY messages until the customer responds with YES, START, or UNSTOP.</p>
+                    </div>
+                </li>
+                
+                <li>
+                    <strong>Customer Receives Initial Opt-In Message</strong>
+                    <p>The customer receives the following message (this is the ONLY message sent before consent):</p>
+                    <div class="message-box">
+                        Hi [Customer Name], this is Detail Pro. Reply YES, START, or UNSTOP to receive appointment reminders and messages. Msg & data rates may apply. Reply STOP to opt out at any time.
+                    </div>
+                    <p><strong>Key Point:</strong> This message clearly explains what the customer is consenting to and provides opt-out instructions upfront.</p>
+                </li>
+                
+                <li>
+                    <strong>Customer Actively Opts In</strong>
+                    <p>The customer must reply with one of the following keywords to provide explicit consent:</p>
+                    <ul style="margin-top: 10px; margin-left: 20px;">
+                        <li><strong>YES</strong></li>
+                        <li><strong>START</strong></li>
+                        <li><strong>UNSTOP</strong></li>
+                    </ul>
+                    <div class="emphasis-box" style="margin-top: 15px;">
+                        <p><strong>⚠️ CONSENT IS REQUIRED</strong></p>
+                        <p>Until the customer replies with one of these keywords, staff CANNOT send any messages—no appointment reminders, no service notifications, nothing. The system enforces this automatically.</p>
+                    </div>
+                </li>
+                
+                <li>
+                    <strong>System Confirms Subscription</strong>
+                    <p>Once the customer replies YES/START/UNSTOP, they immediately receive a confirmation message:</p>
+                    <div class="message-box">
+                        Thank you! You are now subscribed to receive messages. Reply STOP to opt out at any time.
+                    </div>
+                    <div class="success-box" style="margin-top: 15px;">
+                        <p><strong>✅ CONSENT GRANTED - MESSAGING ENABLED</strong></p>
+                        <p>Only after this confirmation can staff send appointment reminders, service completion notifications, and other transactional messages.</p>
+                    </div>
+                </li>
+                
+                <li>
+                    <strong>Regular Transactional Messages</strong>
+                    <p>With explicit consent obtained, customers now receive:</p>
+                    <ul style="margin-top: 10px; margin-left: 20px;">
+                        <li>Appointment reminders</li>
+                        <li>Service completion notifications</li>
+                        <li>Scheduling links</li>
+                        <li>Service follow-up messages</li>
+                    </ul>
+                    <p style="margin-top: 10px;"><em>All messages are transactional and service-related. We do not send promotional or marketing messages.</em></p>
+                </li>
+            </ol>
+        </div>
 
-        <h2>How to Opt Out</h2>
-        
-        <div class="highlight-box">
-            <p><strong>Customers can stop receiving messages at any time by:</strong></p>
-            <ul>
-                <li>Replying <strong>STOP</strong> to any text message</li>
-                <li>Contacting us at <a href="mailto:Apexintegrations2006@gmail.com">Apexintegrations2006@gmail.com</a></li>
-                <li>Letting us know in person or by phone</li>
+        <div class="card">
+            <h2>Visual Documentation: Step-by-Step Screenshots</h2>
+            
+            <h3>Step 1: Adding Customer Information</h3>
+            <p>Staff enters the customer's name and phone number in the Detail Pro app. No SMS consent checkbox exists—consent is obtained entirely through the SMS opt-in process.</p>
+            <div class="screenshot">
+                <img src="https://i.imgur.com/YourEditCustomerScreenshot.png" alt="Edit Customer Screen" style="max-width: 400px;">
+                <p class="screenshot-caption">Detail Pro app: Customer information entry screen showing name and phone number fields</p>
+            </div>
+
+            <h3>Step 2: Sending the Opt-In Message</h3>
+            <p>Staff must manually click "Send Opt-In Text" to initiate the consent process. The system then displays "Waiting for Customer to Opt In" status.</p>
+            <div class="two-col-screenshots">
+                <div class="screenshot">
+                    <img src="https://i.imgur.com/YourSendOptInButton.png" alt="Send Opt-In Text Button" style="max-width: 400px;">
+                    <p class="screenshot-caption">Staff must click "Send Opt-In Text" to initiate consent</p>
+                </div>
+                <div class="screenshot">
+                    <img src="https://i.imgur.com/YourWaitingScreen.png" alt="Waiting for Customer to Opt In" style="max-width: 400px;">
+                    <p class="screenshot-caption">System blocks all messages until customer responds</p>
+                </div>
+            </div>
+
+            <h3>Step 3: Customer Receives Opt-In Message</h3>
+            <p>The customer receives the initial opt-in message on their phone. This is the exact message content:</p>
+            <div class="screenshot">
+                <img src="https://i.imgur.com/YourOptInMessageReceived.png" alt="Opt-In Message Received" style="max-width: 400px;">
+                <p class="screenshot-caption">Customer receives opt-in message asking them to reply YES, START, or UNSTOP</p>
+            </div>
+            
+            <div class="message-box">
+                <strong>Exact Message Text:</strong><br><br>
+                Hi Aubrey, this is Detail Pro. Reply YES, START, or UNSTOP to receive appointment reminders and messages. Msg & data rates may apply. Reply STOP to opt out at any time.
+            </div>
+
+            <h3>Step 4: Customer Replies to Opt In</h3>
+            <p>The customer actively consents by replying with "YES", "START", or "UNSTOP".</p>
+            <div class="screenshot">
+                <img src="https://i.imgur.com/YourCustomerRepliesYes.png" alt="Customer Replies Yes" style="max-width: 400px;">
+                <p class="screenshot-caption">Customer replies "yes" to provide explicit consent</p>
+            </div>
+
+            <h3>Step 5: Confirmation & Regular Messages</h3>
+            <p>The system confirms the subscription and can now send regular transactional messages.</p>
+            <div class="screenshot">
+                <img src="https://i.imgur.com/YourConfirmationMessage.png" alt="Confirmation and Regular Message" style="max-width: 400px;">
+                <p class="screenshot-caption">Customer receives confirmation message followed by regular service notifications</p>
+            </div>
+            
+            <div class="message-box">
+                <strong>Confirmation Message:</strong><br><br>
+                Thank you! You are now subscribed to receive messages. Reply STOP to opt out at any time.
+                <br><br>
+                <strong>Example Regular Message:</strong><br><br>
+                Hi Aubrey, your Basic Wash service is complete! Thank you for trusting us with your vehicle. We hope you love the results! If you have any questions or concerns, please don't hesitate to reach out. If you have any questions, please text.
+                <br><br>
+                Reply STOP to opt out
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Opt-Out Process</h2>
+            
+            <h3>Customer Replies STOP</h3>
+            <p>Customers can opt out at any time by replying <strong>STOP</strong> to any message. When they do:</p>
+            
+            <div class="critical-box">
+                <p><strong>🔒 COMPLETE MESSAGING BLOCK</strong></p>
+                <p>All messaging is immediately and completely blocked. Staff cannot send ANY messages to this customer—not even a new opt-in message. The customer must initiate re-subscription themselves.</p>
+            </div>
+            
+            <div class="screenshot">
+                <img src="https://i.imgur.com/YourStopResponse.png" alt="STOP Response" style="max-width: 400px;">
+                <p class="screenshot-caption">Customer receives automatic STOP confirmation from the network</p>
+            </div>
+            
+            <div class="message-box">
+                <strong>Network STOP Response:</strong><br><br>
+                NETWORK MSG: You replied with the word "stop" which blocks all texts sent from this number. Text back "unstop" or "start" to receive messages again.
+            </div>
+
+            <h3>Re-Subscribing After STOP</h3>
+            <p>If a customer wants to receive messages again after opting out, they must text <strong>UNSTOP</strong> or <strong>START</strong> back to our number. Staff cannot re-initiate messaging—only the customer can unblock it.</p>
+        </div>
+
+        <div class="card">
+            <h2>Consent Record Keeping</h2>
+            <p>We maintain secure records of all SMS consent activity, including:</p>
+            <ul style="margin-left: 25px; margin-top: 15px;">
+                <li>Customer name and phone number</li>
+                <li>Date consent was obtained</li>
+                <li>Opt-in and opt-out actions</li>
+                <li>Message delivery logs</li>
             </ul>
+            <p style="margin-top: 15px;">These records are securely stored and available for compliance review upon request.</p>
         </div>
 
-        <h2>Record Keeping</h2>
-        
-        <p>We maintain records of all SMS consent, including:</p>
-        
-        <ul>
-            <li>Customer name and phone number</li>
-            <li>Date consent was obtained</li>
-        </ul>
-        
-        <p>These records are securely stored and available for compliance review.</p>
-
-        <h2>Contact Us</h2>
-        
-        <div class="contact-box">
-            <p>Questions about SMS messaging or want to update your preferences?</p>
-            <p>
-                <strong>Apex Integrations LLC</strong><br>
-                Email: <a href="mailto:Apexintegrations2006@gmail.com">Apexintegrations2006@gmail.com</a><br>
-                Location: Arizona, United States
-            </p>
+        <div class="card">
+            <h2>TCPA Compliance Summary</h2>
+            <p>Our SMS consent process complies with the Telephone Consumer Protection Act (TCPA) and A2P messaging requirements:</p>
+            
+            <div class="info-box">
+                <ul style="margin-left: 20px;">
+                    <li><strong>✓ Explicit Consent Required:</strong> Customers must actively reply YES/START/UNSTOP to opt in</li>
+                    <li><strong>✓ Clear Disclosure:</strong> Opt-in message clearly states what customers are consenting to</li>
+                    <li><strong>✓ Easy Opt-Out:</strong> Customers can reply STOP at any time</li>
+                    <li><strong>✓ No Pre-Consent Messages:</strong> System blocks all messages until customer opts in</li>
+                    <li><strong>✓ Transactional Only:</strong> All messages are service-related, not promotional</li>
+                    <li><strong>✓ Complete Opt-Out Enforcement:</strong> STOP replies block all messaging until customer re-subscribes</li>
+                </ul>
+            </div>
         </div>
+    </div>
 
-        <hr>
-
-        <p style="text-align: center; color: #666; margin-top: 40px;">
-            <strong>Effective Date:</strong> January 31, 2026<br>
+    <div class="contact-footer">
+        <h3>Contact Information</h3>
+        <p style="margin-top: 15px;">
+            <strong>Apex Integrations LLC</strong><br>
+            Arizona, United States<br>
+            Email: <a href="mailto:Apexintegrations2006@gmail.com">Apexintegrations2006@gmail.com</a>
+        </p>
+        <p style="margin-top: 30px; font-size: 0.9em; opacity: 0.8;">
+            <strong>Last Updated:</strong> February 26, 2026<br>
             © 2026 Apex Integrations LLC. All rights reserved.
         </p>
     </div>
 </body>
 </html>
-
