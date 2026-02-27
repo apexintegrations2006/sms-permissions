@@ -351,31 +351,30 @@
             <h2>Visual Documentation: Step-by-Step Screenshots</h2>
             
             <h3>Step 1: Adding Customer Information</h3>
-            <p>Staff enters the customer's name and phone number in the Detail Pro app. No SMS consent checkbox exists—consent is obtained entirely through the SMS opt-in process.</p>
-            <div class="screenshot">
-                <img src="https://i.imgur.com/YourEditCustomerScreenshot.png" alt="Edit Customer Screen" style="max-width: 400px;">
-                <p class="screenshot-caption">Detail Pro app: Customer information entry screen showing name and phone number fields</p>
-            </div>
+            <p>Staff enters the customer's name and phone number in the Detail Pro app's "Edit Customer" screen. The form includes fields for:</p>
+            <ul style="margin-left: 25px; margin-top: 10px;">
+                <li>Customer name</li>
+                <li>Phone number</li>
+                <li>Email address (optional)</li>
+                <li>Vehicle information</li>
+            </ul>
+            <p style="margin-top: 10px;"><strong>Important:</strong> There is NO SMS consent checkbox on this form. Consent is obtained entirely through the SMS opt-in process described below.</p>
 
             <h3>Step 2: Sending the Opt-In Message</h3>
-            <p>Staff must manually click "Send Opt-In Text" to initiate the consent process. The system then displays "Waiting for Customer to Opt In" status.</p>
-            <div class="two-col-screenshots">
-                <div class="screenshot">
-                    <img src="https://i.imgur.com/YourSendOptInButton.png" alt="Send Opt-In Text Button" style="max-width: 400px;">
-                    <p class="screenshot-caption">Staff must click "Send Opt-In Text" to initiate consent</p>
-                </div>
-                <div class="screenshot">
-                    <img src="https://i.imgur.com/YourWaitingScreen.png" alt="Waiting for Customer to Opt In" style="max-width: 400px;">
-                    <p class="screenshot-caption">System blocks all messages until customer responds</p>
-                </div>
+            <p>Before any messages can be sent, staff must manually click the <strong>"Send Opt-In Text"</strong> button in the Detail Pro app.</p>
+            
+            <div class="info-box">
+                <p><strong>What happens when staff clicks "Send Opt-In Text":</strong></p>
+                <ol style="margin-left: 20px; margin-top: 10px;">
+                    <li>The system sends the opt-in message to the customer</li>
+                    <li>The app displays: <strong>"Waiting for Customer to Opt In"</strong> with an orange warning banner</li>
+                    <li>The banner states: <em>"Opt-in message sent. Waiting for customer to reply YES before you can send messages."</em></li>
+                    <li>All messaging functionality is blocked until customer responds</li>
+                </ol>
             </div>
 
             <h3>Step 3: Customer Receives Opt-In Message</h3>
-            <p>The customer receives the initial opt-in message on their phone. This is the exact message content:</p>
-            <div class="screenshot">
-                <img src="https://i.imgur.com/YourOptInMessageReceived.png" alt="Opt-In Message Received" style="max-width: 400px;">
-                <p class="screenshot-caption">Customer receives opt-in message asking them to reply YES, START, or UNSTOP</p>
-            </div>
+            <p>The customer receives the initial opt-in message on their phone via SMS. This is the exact message content:</p>
             
             <div class="message-box">
                 <strong>Exact Message Text:</strong><br><br>
@@ -383,18 +382,15 @@
             </div>
 
             <h3>Step 4: Customer Replies to Opt In</h3>
-            <p>The customer actively consents by replying with "YES", "START", or "UNSTOP".</p>
-            <div class="screenshot">
-                <img src="https://i.imgur.com/YourCustomerRepliesYes.png" alt="Customer Replies Yes" style="max-width: 400px;">
-                <p class="screenshot-caption">Customer replies "yes" to provide explicit consent</p>
+            <p>The customer actively consents by replying with one of the accepted keywords. In this example, the customer replies <strong>"yes"</strong> (lowercase is accepted).</p>
+            
+            <div class="success-box">
+                <p><strong>✅ Customer Response Received</strong></p>
+                <p>When the customer replies YES, START, or UNSTOP, the system immediately recognizes the consent and proceeds to send the confirmation message.</p>
             </div>
 
             <h3>Step 5: Confirmation & Regular Messages</h3>
-            <p>The system confirms the subscription and can now send regular transactional messages.</p>
-            <div class="screenshot">
-                <img src="https://i.imgur.com/YourConfirmationMessage.png" alt="Confirmation and Regular Message" style="max-width: 400px;">
-                <p class="screenshot-caption">Customer receives confirmation message followed by regular service notifications</p>
-            </div>
+            <p>Once consent is received, the customer immediately gets a confirmation message, and staff can now send regular transactional messages.</p>
             
             <div class="message-box">
                 <strong>Confirmation Message:</strong><br><br>
@@ -418,15 +414,12 @@
                 <p>All messaging is immediately and completely blocked. Staff cannot send ANY messages to this customer—not even a new opt-in message. The customer must initiate re-subscription themselves.</p>
             </div>
             
-            <div class="screenshot">
-                <img src="https://i.imgur.com/YourStopResponse.png" alt="STOP Response" style="max-width: 400px;">
-                <p class="screenshot-caption">Customer receives automatic STOP confirmation from the network</p>
-            </div>
-            
             <div class="message-box">
-                <strong>Network STOP Response:</strong><br><br>
+                <strong>Network STOP Response (Automatic):</strong><br><br>
                 NETWORK MSG: You replied with the word "stop" which blocks all texts sent from this number. Text back "unstop" or "start" to receive messages again.
             </div>
+            
+            <p style="margin-top: 15px;">This is an automatic network-level response that confirms the customer has been unsubscribed. The customer's keyboard will show quick-reply suggestions for "unstop" and "start" to make re-subscribing easy if they change their mind.</p>
 
             <h3>Re-Subscribing After STOP</h3>
             <p>If a customer wants to receive messages again after opting out, they must text <strong>UNSTOP</strong> or <strong>START</strong> back to our number. Staff cannot re-initiate messaging—only the customer can unblock it.</p>
